@@ -4,6 +4,7 @@ version = "0.1.0"
 description = "System Resource Monitor for Experiments"
 authors = ["Ilya Kaftanov <kaftanovwork@gmail.com>"]
 readme = "README.md"
+homepage = "https://github.com/IKaftanov/srme"
 
 [tool.poetry.dependencies]
 python = "^3.9"

@@ -2,7 +2,6 @@ import typing as t
 
 import srme.metrics as m
 from srme.core import MetricCollector, Tracker
-from srme.savers.csv_tracker import CSVSaver
 
 
 def _get_basic_collector() -> MetricCollector:
@@ -20,6 +19,18 @@ class CSVLogger(Tracker):
         collector: t.Optional[MetricCollector] = None,
         save_freq: int = 1,
     ) -> None:
+        """
+        Log resource usage into csv file.
+
+        :param save_path: open in wa model, so keep the file clean, defaults to "srme_metrics.csv"
+        :type save_path: str, optional
+        :param collector: metrics collector class, defaults to None
+        :type collector: t.Optional[MetricCollector], optional
+        :param save_freq: frequency in second (sleep between writings), defaults to 1
+        :type save_freq: int, optional
+        """
+        from srme.savers.csv_saver import CSVSaver
+
         if not collector:
             collector = _get_basic_collector()
 
@@ -28,7 +39,15 @@ class CSVLogger(Tracker):
 
 
 class MlFlowLogger(Tracker):
-    def __init__(self, collector: t.Optional[MetricCollector], save_freq: int = 1) -> None:
+    def __init__(self, collector: t.Optional[MetricCollector] = None, save_freq: int = 1) -> None:
+        """
+        Track system resource usage to MLFlow.
+
+        :param collector: metrics collector class, defaults to None
+        :type collector: t.Optional[MetricCollector], optional
+        :param save_freq: frequency in second (sleep between writings), defaults to 1
+        :type save_freq: int, optional
+        """
         from srme.savers.mlflow_saver import MlFlowSaver
 
         mlflow_saver = MlFlowSaver()
