@@ -2,7 +2,7 @@
 name = "srme"
 version = "0.1.1"
 description = "System Resource Monitor for Experiments"
-authors = ["Ilya Kaftanov <kaftanovwork@gmail.com>"]
+authors = ["Ilya Kaftanov"]
 readme = "README.md"
 homepage = "https://github.com/IKaftanov/srme"
 
