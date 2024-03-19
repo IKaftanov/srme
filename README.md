@@ -23,3 +23,7 @@ csv_logger = CSVLogger()
 ...
 csv_logger.end()
 ```
+
+For `MlFlowLogger` you could do the same.
+In case you just need to log in *mlflow* read this document:
+https://mlflow.org/docs/latest/system-metrics/index.html
