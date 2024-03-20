@@ -9,6 +9,10 @@ def _get_basic_collector() -> MetricCollector:
     collector.register("cpu_usage_percent", m.get_cpu_percent)
     collector.register("vm_percent", m.get_vm_percent)
     collector.register("disk_left_percent", m.get_disk_usage_percent)
+    if m.is_nvidia_smi_available():
+        collector.register(
+            "gpu_mem_usage_percent (GB)", m.get_gpu_usage_percent_getter()
+        )
     return collector
 
 
@@ -39,7 +43,9 @@ class CSVLogger(Tracker):
 
 
 class MlFlowLogger(Tracker):
-    def __init__(self, collector: t.Optional[MetricCollector] = None, save_freq: int = 1) -> None:
+    def __init__(
+        self, collector: t.Optional[MetricCollector] = None, save_freq: int = 1
+    ) -> None:
         """
         Track system resource usage to MLFlow.
 

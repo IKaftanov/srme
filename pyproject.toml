@@ -10,6 +10,7 @@ homepage = "https://github.com/IKaftanov/srme"
 python = "^3.9"
 psutil = "^5.9.8"
 mlflow = { version = "^2.11.1", optional = true }
+pynvml = "^11.5.0"
 
 [tool.poetry.extras]
 mlflow = ["mlflow"]

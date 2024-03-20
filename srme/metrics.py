@@ -1,5 +1,7 @@
 import subprocess as sp
+
 import psutil
+import pynvml
 
 
 def is_nvidia_smi_available() -> bool:
@@ -27,3 +29,14 @@ def get_vm_percent() -> float:
 
 def get_disk_usage_percent() -> float:
     return psutil.disk_usage("/").percent
+
+
+def get_gpu_usage_percent_getter():
+    pynvml.nvmlInit()
+    handle = pynvml.nvmlDeviceGetHandleByIndex(0)
+
+    def inner_f() -> float:
+        info = pynvml.nvmlDeviceGetMemoryInfo(handle)
+        return round(int(info.free) * 10 ** (-9), 2)
+
+    return inner_f
